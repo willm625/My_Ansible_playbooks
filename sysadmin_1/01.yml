@@ -1,0 +1,10 @@
+---
+- name: Upgrade all apt packages
+  hosts: all
+
+  tasks:
+          - name: Upgrade
+            apt:
+                    force_apt_get: yes
+                    upgrade: dist
+            become: yes
