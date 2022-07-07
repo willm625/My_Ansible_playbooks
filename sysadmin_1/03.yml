@@ -1,0 +1,14 @@
+---
+
+- name: Part Three
+  connection: ansible.netcommon.network_cli
+  gather_facts: false
+  hosts: all
+  tasks:
+
+          - name: Get config
+            vyos.vyos.vyos_facts:
+                    gather_subset: all
+          - name: Display
+            debug:
+                    msg: "The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
