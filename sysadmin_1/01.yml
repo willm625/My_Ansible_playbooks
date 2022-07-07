@@ -16,6 +16,7 @@
           - name: Check hostname, version, and distribution
             register: unameout
             command: "uname -a"
+
           - name: Check disk usage
             register: dfout
             command: "df -h"

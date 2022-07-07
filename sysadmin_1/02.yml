@@ -1,0 +1,28 @@
+---
+- name: Part Two
+  hosts: all
+
+  tasks:
+          - name: Create new file
+            command: "touch dir1/file_a.txt"
+            args:
+                    creates: "dir1/file_a.txt"
+            register: createif
+
+          - name: Display newly created file
+            command: "ls -lrt dir1/file_a.txt"
+            register: displayif
+            when: createif is changed
+
+          - name: Copy file from host machine to remote
+            ansible.builtin.copy:
+                    src: ../../newfile.txt
+                    dest: dir1/
+                    mode: '0644'
+
+          - name: Remove file if it exists
+            command: "rm -rf dir1/file_a.txt"
+            args:
+                    removes: "dir1/file_a.txt" 
+            register: removeif
+
